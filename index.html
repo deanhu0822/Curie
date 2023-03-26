@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="./hack2023.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="stylesheet" type="text/css" href="./hack2023.css">
+  </head>
+  <img id="logo" src="logo.png">
+  <body>
+    <!-- <h1>Sample title</h1> -->
+    <div aria-label="Input address here" id="search-bar">
+      <input type="text" id="address-input" placeholder="Enter an address">
+      <button id="voice-button" aria-label="Click to speak address"></button>
+    </div>
+    <div id="output">
+      <p id="gpt"></p>
+    </div>
+    <div id="loading">Loading...</div>
+    <!-- <button id="submit-btn">Submit</button> -->
+    <video autoplay muted id="myVideo">
+      <source src="./background-video.mp4" type="video/mp4">
+    </video>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_DKTjRIgEhR8l5v1PVEifuFeeHAYnPoY&callback=initMap&libraries=places"
+      defer
+    ></script>
+  </body>
+</html>
