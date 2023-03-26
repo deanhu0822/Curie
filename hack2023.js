@@ -74,8 +74,8 @@ function onPlaceChanged() {
   voiceButton.style.display="none";
   const logo = document.getElementById("logo");
   logo.style.display="none";
-  const loading = document.getElementById("loading");
-  loading.style.display="initial"
+  // const loading = document.getElementById("loading");
+  // loading.style.display="initial"
   // Request a street view image from Google
 
   var promises = [];
@@ -99,24 +99,29 @@ function onPlaceChanged() {
     }));
   }
 
-  // let i = 0;
-  // const imageElements = [];
-  // const imageInterval = setInterval(function () {
-  //   if (i >= images.length) {
-  //     clearInterval(imageInterval);
-  //     // return;
-  //   }
-  //   const streetViewUrl = images[i];
-  //   // console.log(`${streetViewUrl}`)
-  //   const streetViewImg = document.createElement("img");
-  //   streetViewImg.src = streetViewUrl;
-  //   document.body.appendChild(streetViewImg);
-  //   imageElements.push(streetViewImg);
-  //   i++;
-  // }, 250);
-  
-  // // To stop the interval execution:
-  // clearInterval(imageInterval);
+  let i = 0;
+  const imageElements = [];
+  document.body.style.flexDirection = 'row';
+  document.body.style.flexWrap = 'wrap';
+  document.body.style.justifyContent = 'baseline';
+  document.body.style.alignContent = 'flexStart';
+  const imageInterval = setInterval(function () {
+    if (i >= images.length - 1) {
+      clearInterval(imageInterval);
+      document.body.style.flexDirection = 'column';
+      document.body.style.flexWrap = 'nowrap'
+      document.body.style.justifyContent = 'center';
+      document.body.style.alignItems = 'center';
+    }
+    const streetViewUrl = images[i];
+    // console.log(`${streetViewUrl}`)
+    const streetViewImg = document.createElement("img");
+    streetViewImg.style.height = '25%';
+    streetViewImg.src = streetViewUrl;
+    document.body.appendChild(streetViewImg);
+    imageElements.push(streetViewImg);
+    i++;
+  }, 750);
   
   
   Promise.all(promises).then(labelStrings => {
@@ -127,7 +132,7 @@ function onPlaceChanged() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer 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`
+        'Authorization': `Bearer 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`
       },
       body: JSON.stringify({
         'model': 'gpt-3.5-turbo',
@@ -137,6 +142,7 @@ function onPlaceChanged() {
     })
     .then(response => response.json())
     .then(data => {
+      clearInterval(imageInterval);
       const loading = document.getElementById("loading");
       loading.style.display = "none";
       const textboxContainer = document.getElementById("output");
@@ -144,6 +150,7 @@ function onPlaceChanged() {
       const textbox = document.getElementById("gpt");
       const content = data.choices[0].message.content;
       textbox.textContent = content;
+      // textbox.style.alt = content;
       imageElements.forEach(function(element) {
         element.style.display="none";
       });
