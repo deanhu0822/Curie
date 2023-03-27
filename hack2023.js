@@ -44,7 +44,7 @@ function initMap() {
 
    gapi.load('client', function() {
     gapi.client.init({
-      apiKey: 'AIzaSyC_DKTjRIgEhR8l5v1PVEifuFeeHAYnPoY',
+      apiKey: 'GOOGLE_API_KEY_HERE',
       clientId: '13163583024-c4fivcm7s90g5lga1nc8g7d4t6fumufu.apps.googleusercontent.com',
       discoveryDocs: ['https://vision.googleapis.com/$discovery/rest?version=v1'],
       scope: 'https://www.googleapis.com/auth/cloud-platform'
@@ -67,6 +67,8 @@ function onPlaceChanged() {
 
   // Remove the address text input from the view
   const addressInput = document.querySelector("input[type='text']");
+  const addressInputElement = document.getElementById("address-input");
+  // addressInputElement.remove();
   addressInput.style.display = "none";
   backgroundVideo = document.getElementById("myVideo");
   backgroundVideo.style.display="none";
@@ -82,7 +84,7 @@ function onPlaceChanged() {
 
   var images = [];
   for (let i = 0; i <= 270; i += 90) {
-    const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=720x480&location=${lat},${lng}&fov=120&heading=${i}&pitch=10&key=AIzaSyC_DKTjRIgEhR8l5v1PVEifuFeeHAYnPoY`;
+    const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=720x480&location=${lat},${lng}&fov=120&heading=${i}&pitch=10&key=GOOGLE_API_KEY_HERE`;
     images.push(streetViewUrl);
     // Call analyzeImage and save the promise returned by it
     promises.push(new Promise((resolve, reject) => {
@@ -132,7 +134,7 @@ function onPlaceChanged() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer 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`
+        'Authorization': `Bearer OPENAI_API_KEY_HERE`
       },
       body: JSON.stringify({
         'model': 'gpt-3.5-turbo',
@@ -147,10 +149,11 @@ function onPlaceChanged() {
       loading.style.display = "none";
       const textboxContainer = document.getElementById("output");
       textboxContainer.style.display = "initial";
-      const textbox = document.getElementById("gpt");
+      const textbox = document.getElementById("output");
       const content = data.choices[0].message.content;
       textbox.textContent = content;
-      // textbox.style.alt = content;
+      textboxContainer.setAttribute('aria-label', content);
+      textboxContainer.focus();
       imageElements.forEach(function(element) {
         element.style.display="none";
       });

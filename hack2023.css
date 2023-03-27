@@ -84,12 +84,13 @@
  
 #output {
   font-size:large;
-  padding-inline:10px;
+  padding-inline:15px;
   text-align:justify;
   height:50%;
   width:50%;
   background-color: white;
   border-radius:8px;
+  padding-top:15px;
   overflow:auto;
   /* overflow-wrap: break-word; */
   display:none;
