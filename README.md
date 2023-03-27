@@ -18,3 +18,9 @@ This brings a partial experience of Google Street View to the visually impaired.
 1. Type address into address search bar or use the mic feature to use speech to text.
 2. Select address from autocomplete suggestions.
 3. Read the output from GPT printed in the text box.
+
+### APIs used
+1. Google Street View Static API
+2. Google Places API
+3. Google Cloud Vision API 
+4. OpenAI Completions API 
