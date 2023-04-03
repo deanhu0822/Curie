@@ -1,5 +1,5 @@
-# Curie
-The goal of this program is to provide Google Street View accessibility for those who are visually impaired. 
+#  :.Curie.:
+
 
 The basic process of the program is as follows:
 -> User inputs address text 
